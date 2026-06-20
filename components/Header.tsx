@@ -1,11 +1,15 @@
+"use client";
+
 import { useState, useEffect } from "react";
-import { Menu, X, Palette, ChevronDown } from "lucide-react";
+import { Menu, X, Sparkles, Wand2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
+  { href: "#ai-generator", label: "Create" },
   { href: "#gallery", label: "Gallery" },
-  { href: "#resources", label: "Educational Resources" },
+  { href: "#benefits", label: "Why Color" },
+  { href: "#faq", label: "FAQ" },
 ];
 
 export function Header() {
@@ -13,96 +17,102 @@ export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const scrollToGenerator = () => {
+    setIsMobileMenuOpen(false);
+    document.getElementById("ai-generator")?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        isScrolled
-          ? "bg-background/95 backdrop-blur-md shadow-soft py-3"
-          : "bg-transparent py-5"
+        "fixed inset-x-0 top-0 z-50 transition-all duration-300",
+        isScrolled ? "py-2.5" : "py-4",
       )}
     >
       <div className="container-custom">
-        <nav className="flex items-center justify-between" aria-label="Main navigation">
+        <div
+          className={cn(
+            "flex items-center justify-between rounded-full border transition-all duration-300",
+            isScrolled
+              ? "border-border bg-background/80 px-4 py-2 shadow-soft backdrop-blur-xl"
+              : "border-transparent px-2 py-1",
+          )}
+        >
           {/* Logo */}
           <a
             href="/"
-            className="flex items-center gap-2 font-serif text-xl md:text-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-md"
-            aria-label="ColoringFunAI Home"
+            className="flex items-center gap-2 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            aria-label="ColorMagic Home"
           >
-            <Palette className="w-6 h-6 md:w-7 md:h-7 text-primary" aria-hidden="true" />
-            <span>ColoringFunAI</span>
+            <span className="flex size-9 items-center justify-center rounded-2xl bg-primary text-primary-foreground shadow-soft">
+              <Sparkles className="size-5" aria-hidden="true" />
+            </span>
+            <span className="font-display text-xl font-bold tracking-tight">
+              Color<span className="text-primary">Magic</span>
+            </span>
           </a>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <nav className="hidden items-center gap-1 md:flex" aria-label="Main navigation">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="text-muted-foreground hover:text-foreground transition-colors font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-md px-2 py-1"
+                className="rounded-full px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 {link.label}
               </a>
             ))}
-            <a href="#ai-generator">
-              <Button variant="default" size="sm" className="gap-1">
-                Create with AI
-                <ChevronDown className="w-4 h-4" />
-              </Button>
-            </a>
+          </nav>
+
+          <div className="hidden md:block">
+            <Button variant="hero" size="sm" onClick={scrollToGenerator}>
+              <Wand2 aria-hidden="true" />
+              Create now
+            </Button>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2 rounded-lg hover:bg-secondary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="flex size-10 items-center justify-center rounded-full bg-secondary text-secondary-foreground transition-colors hover:bg-secondary/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:hidden"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-expanded={isMobileMenuOpen}
             aria-controls="mobile-menu"
             aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
           >
-            {isMobileMenuOpen ? (
-              <X className="w-6 h-6" aria-hidden="true" />
-            ) : (
-              <Menu className="w-6 h-6" aria-hidden="true" />
-            )}
+            {isMobileMenuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
           </button>
-        </nav>
+        </div>
 
         {/* Mobile Navigation */}
         <div
           id="mobile-menu"
           className={cn(
-            "md:hidden overflow-hidden transition-all duration-300",
-            isMobileMenuOpen ? "max-h-64 mt-4" : "max-h-0"
+            "overflow-hidden transition-all duration-300 md:hidden",
+            isMobileMenuOpen ? "mt-3 max-h-96" : "max-h-0",
           )}
         >
-          <div className="bg-card rounded-xl p-4 shadow-card">
+          <div className="rounded-3xl border border-border bg-card p-4 shadow-card">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="block py-3 px-4 text-muted-foreground hover:text-foreground hover:bg-secondary rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="block rounded-2xl px-4 py-3 font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
               >
                 {link.label}
               </a>
             ))}
-            <div className="mt-3 pt-3 border-t border-border flex flex-col gap-2">
-              <a href="#ai-generator">
-                <Button variant="default" className="w-full gap-1">
-                  Create with AI
-                  <ChevronDown className="w-4 h-4" />
-                </Button>
-              </a>
-            </div>
+            <Button variant="hero" className="mt-3 w-full" onClick={scrollToGenerator}>
+              <Wand2 aria-hidden="true" />
+              Create now
+            </Button>
           </div>
         </div>
       </div>

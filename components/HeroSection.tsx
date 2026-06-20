@@ -1,5 +1,13 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
-import { ArrowDown, Palette } from "lucide-react";
+import { Wand2, Sparkles, Download, Star } from "lucide-react";
+
+const stats = [
+  { value: "Instant", label: "AI results" },
+  { value: "PDF + PNG", label: "Print-ready" },
+  { value: "100% Free", label: "No sign-up" },
+];
 
 export function HeroSection() {
   const scrollToGenerator = () => {
@@ -8,70 +16,121 @@ export function HeroSection() {
 
   return (
     <section
-      className="relative flex items-center justify-center overflow-hidden"
+      className="relative overflow-hidden pt-28 pb-16 sm:pt-32 md:pt-40 md:pb-24"
       aria-labelledby="hero-heading"
     >
-      {/* Decorative background elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-        <div className="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-primary/5 animate-float" />
-        <div className="absolute -bottom-20 -left-20 w-72 h-72 rounded-full bg-accent/5 animate-float" style={{ animationDelay: "2s" }} />
-        <div className="absolute top-1/3 left-1/4 w-48 h-48 rounded-full bg-secondary animate-float" style={{ animationDelay: "4s" }} />
+      {/* Decorative floating shapes */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+        <div className="absolute -top-24 -right-16 size-80 rounded-full bg-primary/15 blur-2xl animate-float" />
+        <div
+          className="absolute top-40 -left-24 size-72 rounded-full bg-accent/15 blur-2xl animate-float"
+          style={{ animationDelay: "2s" }}
+        />
+        <div
+          className="absolute bottom-0 right-1/3 size-64 rounded-full bg-sunny/20 blur-2xl animate-float"
+          style={{ animationDelay: "4s" }}
+        />
       </div>
 
-      <div className="container-custom relative z-10 text-center pt-24 pb-10 sm:pt-28 md:pt-32 md:pb-16">
-        <div className="inline-flex items-center gap-2 bg-secondary px-4 py-2 rounded-full mb-6 opacity-0 animate-fade-in">
-          <Palette className="w-4 h-4 text-primary" aria-hidden="true" />
-          <span className="text-sm font-medium text-secondary-foreground">
-            100% Free • No Sign-up Required
-          </span>
+      <div className="container-custom relative z-10">
+        <div className="mx-auto max-w-3xl text-center">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 shadow-soft animate-fade-in">
+            <span className="flex -space-x-1" aria-hidden="true">
+              <span className="size-2.5 rounded-full bg-primary" />
+              <span className="size-2.5 rounded-full bg-accent" />
+              <span className="size-2.5 rounded-full bg-sunny" />
+              <span className="size-2.5 rounded-full bg-grape" />
+            </span>
+            <span className="text-sm font-medium text-muted-foreground">
+              AI coloring pages for kids &amp; teens
+            </span>
+          </div>
+
+          <h1
+            id="hero-heading"
+            className="font-display text-4xl font-bold leading-[1.05] tracking-tight text-balance sm:text-5xl md:text-6xl lg:text-7xl animate-fade-in"
+            style={{ animationDelay: "100ms" }}
+          >
+            Imagine it.{" "}
+            <span className="relative whitespace-nowrap text-primary">
+              Color it.
+              <svg
+                className="absolute -bottom-2 left-0 w-full text-sunny"
+                viewBox="0 0 200 12"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M2 9C40 3 160 3 198 9"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </span>
+          </h1>
+
+          <p
+            className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty animate-fade-in"
+            style={{ animationDelay: "200ms" }}
+          >
+            Type any idea, from a skateboarding dinosaur to a magical castle, and our AI
+            turns it into a printable coloring page in seconds.
+          </p>
+
+          <div
+            className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row animate-fade-in"
+            style={{ animationDelay: "300ms" }}
+          >
+            <Button variant="hero" size="xl" onClick={scrollToGenerator}>
+              <Wand2 aria-hidden="true" />
+              Start creating
+            </Button>
+            <Button variant="outline" size="xl" asChild>
+              <a href="#gallery">
+                <Sparkles aria-hidden="true" />
+                Browse gallery
+              </a>
+            </Button>
+          </div>
+
+          <dl
+            className="mx-auto mt-12 grid max-w-lg grid-cols-3 gap-3 animate-fade-in"
+            style={{ animationDelay: "400ms" }}
+          >
+            {stats.map((stat) => (
+              <div
+                key={stat.label}
+                className="rounded-2xl border border-border bg-card px-2 py-4 shadow-soft"
+              >
+                <dt className="font-display text-lg font-bold text-foreground sm:text-xl">
+                  {stat.value}
+                </dt>
+                <dd className="mt-1 text-xs text-muted-foreground sm:text-sm">{stat.label}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
 
-        <h1
-          id="hero-heading"
-          className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-6 leading-tight text-balance opacity-0 animate-fade-in"
-          style={{ animationDelay: "100ms" }}
-        >
-          Free Printable{" "}
-          <span className="text-primary">Coloring Pages</span>{" "}
-          for Everyone
-        </h1>
-
-        <p
-          className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 opacity-0 animate-fade-in"
-          style={{ animationDelay: "200ms" }}
-        >
-          Discover a vast collection of beautiful designs—from intricate mandalas to geometric patterns.
-          Download, print, and start coloring today for relaxation and creative expression.
-        </p>
-
-        <div
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 opacity-0 animate-fade-in"
-          style={{ animationDelay: "300ms" }}
-        >
-          <Button variant="hero" size="xl" onClick={scrollToGenerator}>
-            Create with AI
-            <ArrowDown className="w-5 h-5 ml-1" aria-hidden="true" />
-          </Button>
-          <Button variant="outline" size="xl" asChild>
-            <a href="#benefits">Learn the Benefits</a>
-          </Button>
-        </div>
-
-        <div
-          className="mt-16 flex flex-wrap justify-center gap-8 text-sm text-muted-foreground opacity-0 animate-fade-in"
-          style={{ animationDelay: "400ms" }}
-        >
-          <div className="flex items-center gap-2">
-            <span className="text-2xl font-serif text-foreground">Instant</span>
-            <span>Download</span>
+        {/* Floating feature chips */}
+        <div className="relative mx-auto mt-14 hidden max-w-4xl md:block" aria-hidden="true">
+          <div className="absolute left-0 top-2 flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 shadow-card animate-float">
+            <Star className="size-4 text-sunny" />
+            <span className="text-sm font-medium">Kid-safe prompts</span>
           </div>
-          <div className="flex items-center gap-2">
-            <span className="text-2xl font-serif text-foreground">PDF</span>
-            <span>High Quality</span>
+          <div
+            className="absolute right-0 top-0 flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 shadow-card animate-float"
+            style={{ animationDelay: "1.5s" }}
+          >
+            <Download className="size-4 text-accent" />
+            <span className="text-sm font-medium">One-tap download</span>
           </div>
-          <div className="flex items-center gap-2">
-            <span className="text-2xl font-serif text-foreground">All</span>
-            <span>Ages Welcome</span>
+          <div
+            className="absolute left-1/2 top-20 flex -translate-x-1/2 items-center gap-2 rounded-full border border-border bg-card px-4 py-2 shadow-card animate-float"
+            style={{ animationDelay: "3s" }}
+          >
+            <Wand2 className="size-4 text-primary" />
+            <span className="text-sm font-medium">Made with AI</span>
           </div>
         </div>
       </div>

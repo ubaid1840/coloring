@@ -1,5 +1,7 @@
+"use client";
+
 import { useState } from "react";
-import { Eye, FileText, Printer, Image } from "lucide-react";
+import { Eye, FileText, Printer, Image as ImageIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { jsPDF } from "jspdf";
@@ -21,9 +23,7 @@ export function GallerySection() {
   const visiblePages = filteredPages.slice(0, visibleCount);
   const hasMore = visibleCount < filteredPages.length;
 
-  const handleLoadMore = () => {
-    setVisibleCount((prev) => prev + ITEMS_PER_LOAD);
-  };
+  const handleLoadMore = () => setVisibleCount((prev) => prev + ITEMS_PER_LOAD);
 
   const handleCategoryChange = (category: Category) => {
     setActiveCategory(category);
@@ -41,24 +41,21 @@ export function GallerySection() {
         compress: false,
       });
 
-      // Load the image
       const img = new window.Image();
       img.crossOrigin = "anonymous";
-      
+
       await new Promise((resolve, reject) => {
         img.onload = resolve;
         img.onerror = reject;
         img.src = imageSrc;
       });
 
-      // Page dimensions
       const pageWidth = 8.5;
       const pageHeight = 11;
       const margin = 0.5;
       const maxWidth = pageWidth - 2 * margin;
       const maxHeight = pageHeight - 2 * margin - 0.5;
 
-      // Calculate dimensions maintaining aspect ratio
       const imgAspect = img.width / img.height;
       let imgWidth = maxWidth;
       let imgHeight = imgWidth / imgAspect;
@@ -71,25 +68,22 @@ export function GallerySection() {
       const x = (pageWidth - imgWidth) / 2;
       const y = margin + (maxHeight - imgHeight) / 2;
 
-      // Add image at highest quality
       pdf.addImage(imageSrc, "JPEG", x, y, imgWidth, imgHeight, undefined, "FAST");
 
-      // Add footer
       pdf.setFontSize(8);
       pdf.setTextColor(180, 180, 180);
-      pdf.text("ColoringFunAI - 100% Free Printable Coloring Pages | coloringfunai.com", pageWidth / 2, pageHeight - 0.25, {
+      pdf.text("ColorMagic — Free Printable Coloring Pages", pageWidth / 2, pageHeight - 0.25, {
         align: "center",
       });
 
-      // PDF metadata
       pdf.setProperties({
-        title: `ColoringFunAI - ${title}`,
+        title: `ColorMagic - ${title}`,
         subject: description,
-        creator: "ColoringFunAI",
-        keywords: "coloring page, printable, free, relaxation",
+        creator: "ColorMagic",
+        keywords: "coloring page, printable, free",
       });
 
-      pdf.save(`coloringfunai-${title.toLowerCase().replace(/\s+/g, "-")}.pdf`);
+      pdf.save(`colormagic-${title.toLowerCase().replace(/\s+/g, "-")}.pdf`);
       toast.success("High-quality PDF ready for printing!");
     } catch (error) {
       console.error("PDF generation error:", error);
@@ -121,7 +115,7 @@ export function GallerySection() {
         const url = URL.createObjectURL(blob);
         const a = document.createElement("a");
         a.href = url;
-        a.download = `coloringfunai-${title.toLowerCase().replace(/\s+/g, "-")}.png`;
+        a.download = `colormagic-${title.toLowerCase().replace(/\s+/g, "-")}.png`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
@@ -141,7 +135,7 @@ export function GallerySection() {
         <!DOCTYPE html>
         <html>
           <head>
-            <title>ColoringFunAI - ${title}</title>
+            <title>ColorMagic - ${title}</title>
             <style>
               @page { size: letter; margin: 0.5in; }
               body { margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
@@ -159,27 +153,26 @@ export function GallerySection() {
   };
 
   return (
-    <section
-      id="gallery"
-      className="py-20 md:py-28"
-      aria-labelledby="gallery-heading"
-    >
+    <section id="gallery" className="scroll-mt-24 bg-secondary/40 py-16 md:py-24" aria-labelledby="gallery-heading">
       <div className="container-custom">
-        <div className="text-center mb-12" data-reveal>
+        <div className="mx-auto max-w-2xl text-center" data-reveal>
+          <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-accent/15 px-4 py-2 text-sm font-semibold text-accent">
+            Ready-to-print designs
+          </span>
           <h2
             id="gallery-heading"
-            className="font-serif text-3xl md:text-4xl lg:text-5xl mb-4"
+            className="font-display text-3xl font-bold tracking-tight text-balance md:text-4xl lg:text-5xl"
           >
-            Explore Our Collection
+            Explore the collection
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Browse through hundreds of free coloring pages. Click to preview and download instantly.
+          <p className="mx-auto mt-4 max-w-xl text-lg text-muted-foreground text-pretty">
+            Browse hand-picked coloring pages. Preview, print, or download instantly, no sign-up needed.
           </p>
         </div>
 
         {/* Category Filter */}
         <nav
-          className="flex flex-wrap justify-center gap-2 md:gap-3 mb-12"
+          className="mt-10 flex flex-wrap justify-center gap-2 md:gap-3"
           role="tablist"
           aria-label="Filter coloring pages by category"
         >
@@ -191,10 +184,10 @@ export function GallerySection() {
               aria-selected={activeCategory === category.id}
               aria-controls="gallery-grid"
               className={cn(
-                "px-4 py-2 md:px-6 md:py-2.5 rounded-full text-sm md:text-base font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+                "rounded-full border-2 px-4 py-2 text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                 activeCategory === category.id
-                  ? "bg-primary text-primary-foreground shadow-card"
-                  : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                  ? "border-primary bg-primary text-primary-foreground shadow-soft"
+                  : "border-border bg-card text-muted-foreground hover:border-primary/40 hover:text-foreground",
               )}
             >
               {category.label}
@@ -206,82 +199,73 @@ export function GallerySection() {
         <div
           id="gallery-grid"
           role="tabpanel"
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+          className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
         >
           {visiblePages.map((page, index) => (
             <article
               key={page.id}
-              className="group bg-card rounded-xl overflow-hidden shadow-soft hover:shadow-hover hover:-translate-y-1 transition-all duration-300 opacity-0 animate-fade-in"
-              style={{ animationDelay: `${index * 100}ms` }}
+              className="group overflow-hidden rounded-3xl border border-border bg-card shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-card animate-fade-in"
+              style={{ animationDelay: `${index * 80}ms` }}
             >
-              <div className="relative aspect-square overflow-hidden">
+              <div className="relative aspect-square overflow-hidden bg-white">
                 <img
-                  src={page.image}
+                  src={page.image || "/placeholder.svg"}
                   alt={`${page.title} - ${page.description}`}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-300" />
-                
-                {/* Difficulty Badge */}
                 <span
                   className={cn(
-                    "absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-medium",
-                    page.difficulty === "Easy" && "bg-primary/90 text-primary-foreground",
-                    page.difficulty === "Medium" && "bg-accent/90 text-accent-foreground",
-                    page.difficulty === "Hard" && "bg-secondary text-secondary-foreground"
+                    "absolute right-4 top-4 rounded-full px-3 py-1 text-xs font-semibold",
+                    page.difficulty === "Easy" && "bg-accent text-accent-foreground",
+                    page.difficulty === "Medium" && "bg-sunny text-sunny-foreground",
+                    page.difficulty === "Hard" && "bg-grape text-grape-foreground",
                   )}
                 >
                   {page.difficulty}
                 </span>
               </div>
 
-              <div className="p-5 md:p-6">
-                <h3 className="font-serif text-xl mb-2">{page.title}</h3>
-                <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
-                  {page.description}
-                </p>
+              <div className="p-5">
+                <h3 className="font-display text-lg font-semibold">{page.title}</h3>
+                <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">{page.description}</p>
 
-                <div className="flex flex-wrap gap-2">
+                <div className="mt-4 grid grid-cols-2 gap-2">
                   <Button
                     variant="outline"
                     size="sm"
-                    className="flex-1 min-w-[70px]"
                     onClick={() => window.open(page.image, "_blank")}
                     aria-label={`Preview ${page.title}`}
                   >
-                    <Eye className="w-4 h-4" aria-hidden="true" />
-                    <span>View</span>
+                    <Eye aria-hidden="true" />
+                    View
                   </Button>
                   <Button
                     variant="default"
                     size="sm"
-                    className="flex-1 min-w-[70px]"
                     onClick={() => handleDownloadPDF(page.title, page.image, page.description)}
                     aria-label={`Download ${page.title} as PDF`}
                   >
-                    <FileText className="w-4 h-4" aria-hidden="true" />
-                    <span>PDF</span>
+                    <FileText aria-hidden="true" />
+                    PDF
                   </Button>
                   <Button
                     variant="secondary"
                     size="sm"
-                    className="flex-1 min-w-[70px]"
                     onClick={() => handleDownloadPNG(page.title, page.image)}
                     aria-label={`Download ${page.title} as PNG`}
                   >
-                    <Image className="w-4 h-4" aria-hidden="true" />
-                    <span>PNG</span>
+                    <ImageIcon aria-hidden="true" />
+                    PNG
                   </Button>
                   <Button
                     variant="outline"
                     size="sm"
-                    className="flex-1 min-w-[70px]"
                     onClick={() => handlePrint(page.title, page.image)}
                     aria-label={`Print ${page.title}`}
                   >
-                    <Printer className="w-4 h-4" aria-hidden="true" />
-                    <span>Print</span>
+                    <Printer aria-hidden="true" />
+                    Print
                   </Button>
                 </div>
               </div>
@@ -289,11 +273,10 @@ export function GallerySection() {
           ))}
         </div>
 
-        {/* Load More */}
         {hasMore && (
-          <div className="text-center mt-12">
+          <div className="mt-12 text-center">
             <Button variant="outline" size="lg" onClick={handleLoadMore}>
-              Load More
+              Load more designs
             </Button>
           </div>
         )}

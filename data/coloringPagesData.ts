@@ -1,25 +1,36 @@
-import coloringMandala from "@/assets/coloring-mandala.jpg";
-import coloringLotusMandala from "@/assets/coloring-lotus-mandala.jpg";
-import coloringZenMandala from "@/assets/coloring-zen-mandala.jpg";
-import coloringCelestialMandala from "@/assets/coloring-celestial-mandala.jpg";
-import coloringGeometric from "@/assets/coloring-geometric.jpg";
-import coloringSacredGeometry from "@/assets/coloring-sacred-geometry.jpg";
-import coloringTessellation from "@/assets/coloring-tessellation.jpg";
-import coloringCubic from "@/assets/coloring-cubic.jpg";
-import coloringFloral from "@/assets/coloring-floral.jpg";
-import coloringRoseBouquet from "@/assets/coloring-rose-bouquet.jpg";
-import coloringWildflower from "@/assets/coloring-wildflower.jpg";
-import coloringTropicalFlowers from "@/assets/coloring-tropical-flowers.jpg";
-import coloringAnimal from "@/assets/coloring-animal.jpg";
-import coloringLion from "@/assets/coloring-lion.jpg";
-import coloringButterfly from "@/assets/coloring-butterfly.jpg";
-import coloringOcean from "@/assets/coloring-ocean.jpg";
-import coloringAbstract from "@/assets/coloring-abstract.jpg";
-import coloringPaisley from "@/assets/coloring-paisley.jpg";
-import coloringDoodle from "@/assets/coloring-doodle.jpg";
-import coloringZentangle from "@/assets/coloring-zentangle.jpg";
+const img = (name: string) => `/gallery/${name}.jpg`;
 
-export type Category = "all" | "mandala" | "geometric" | "floral" | "animals" | "abstract" | "nature" | "fantasy" | "patterns";
+const coloringMandala = img("coloring-mandala");
+const coloringLotusMandala = img("coloring-lotus-mandala");
+const coloringZenMandala = img("coloring-zen-mandala");
+const coloringCelestialMandala = img("coloring-celestial-mandala");
+const coloringGeometric = img("coloring-geometric");
+const coloringSacredGeometry = img("coloring-sacred-geometry");
+const coloringTessellation = img("coloring-tessellation");
+const coloringCubic = img("coloring-cubic");
+const coloringFloral = img("coloring-floral");
+const coloringRoseBouquet = img("coloring-rose-bouquet");
+const coloringWildflower = img("coloring-wildflower");
+const coloringTropicalFlowers = img("coloring-tropical-flowers");
+const coloringAnimal = img("coloring-animal");
+const coloringLion = img("coloring-lion");
+const coloringButterfly = img("coloring-butterfly");
+const coloringOcean = img("coloring-ocean");
+const coloringAbstract = img("coloring-abstract");
+const coloringPaisley = img("coloring-paisley");
+const coloringDoodle = img("coloring-doodle");
+const coloringZentangle = img("coloring-zentangle");
+
+export type Category =
+  | "all"
+  | "mandala"
+  | "geometric"
+  | "floral"
+  | "animals"
+  | "abstract"
+  | "nature"
+  | "fantasy"
+  | "patterns";
 
 export const categories: { id: Category; label: string }[] = [
   { id: "all", label: "All Designs" },
@@ -41,47 +52,26 @@ const abstractImages = [coloringAbstract, coloringPaisley, coloringDoodle, color
 
 const difficulties = ["Easy", "Medium", "Hard"] as const;
 
-const mandalaNames = [
-  "Peaceful Mandala", "Lotus Mandala", "Zen Circle Mandala", "Celestial Mandala"
-];
-
-const geometricNames = [
-  "Honeycomb Pattern", "Sacred Geometry", "Tessellation Art", "Cubic Dreams"
-];
-
-const floralNames = [
-  "Garden Blooms", "Rose Bouquet", "Wildflower Meadow", "Tropical Flowers"
-];
-
-const animalNames = [
-  "Wise Owl", "Majestic Lion", "Butterfly Garden", "Ocean Friends"
-];
-
-const abstractNames = [
-  "Flowing Waves", "Paisley Dreams", "Doodle Art", "Zentangle Fusion"
-];
+const mandalaNames = ["Peaceful Mandala", "Lotus Mandala", "Zen Circle Mandala", "Celestial Mandala"];
+const geometricNames = ["Honeycomb Pattern", "Sacred Geometry", "Tessellation Art", "Cubic Dreams"];
+const floralNames = ["Garden Blooms", "Rose Bouquet", "Wildflower Meadow", "Tropical Flowers"];
+const animalNames = ["Wise Owl", "Majestic Lion", "Butterfly Garden", "Ocean Friends"];
+const abstractNames = ["Flowing Waves", "Paisley Dreams", "Doodle Art", "Zentangle Fusion"];
 
 const natureNames = [
   "Garden Blooms", "Rose Bouquet", "Wildflower Meadow", "Tropical Flowers",
-  "Flowing Waves", "Paisley Dreams", "Doodle Art", "Zentangle Fusion"
+  "Flowing Waves", "Paisley Dreams", "Doodle Art", "Zentangle Fusion",
 ];
-
 const fantasyNames = [
   "Wise Owl", "Majestic Lion", "Butterfly Garden", "Ocean Friends",
-  "Peaceful Mandala", "Lotus Mandala", "Zen Circle Mandala", "Celestial Mandala"
+  "Peaceful Mandala", "Lotus Mandala", "Zen Circle Mandala", "Celestial Mandala",
 ];
-
 const patternNames = [
   "Honeycomb Pattern", "Sacred Geometry", "Tessellation Art", "Cubic Dreams",
-  "Flowing Waves", "Paisley Dreams", "Doodle Art", "Zentangle Fusion"
+  "Flowing Waves", "Paisley Dreams", "Doodle Art", "Zentangle Fusion",
 ];
 
-const createPages = (
-  category: string,
-  names: string[],
-  images: string[],
-  startId: number
-) => {
+const createPages = (category: string, names: string[], images: string[], startId: number) => {
   return names.map((name, index) => ({
     id: startId + index,
     title: name,

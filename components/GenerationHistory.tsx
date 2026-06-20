@@ -58,18 +58,18 @@ export function GenerationHistory({ history, onRemove, onClear }: GenerationHist
 
       pdf.setFontSize(8);
       pdf.setTextColor(180, 180, 180);
-      pdf.text("ColoringFunAI - 100% Free Printable Coloring Pages | coloringfunai.com", pageWidth / 2, pageHeight - 0.25, {
+      pdf.text("ColorMagic — Free Printable Coloring Pages", pageWidth / 2, pageHeight - 0.25, {
         align: "center",
       });
 
       pdf.setProperties({
-        title: `ColoringFunAI - ${item.categoryLabel} Coloring Page`,
+        title: `ColorMagic - ${item.categoryLabel} Coloring Page`,
         subject: "Free Printable Coloring Page",
-        creator: "ColoringFunAI",
-        keywords: "coloring page, printable, free, kids, adults",
+        creator: "ColorMagic",
+        keywords: "coloring page, printable, free, kids, teens",
       });
 
-      pdf.save(`coloringfunai-${item.categoryLabel.toLowerCase().replace(/\s+/g, "-")}-coloring-page.pdf`);
+      pdf.save(`colormagic-${item.categoryLabel.toLowerCase().replace(/\s+/g, "-")}-coloring-page.pdf`);
 
       toast.success("High-quality PDF ready for printing!");
     } catch (error) {
@@ -102,7 +102,7 @@ export function GenerationHistory({ history, onRemove, onClear }: GenerationHist
         const url = URL.createObjectURL(blob);
         const a = document.createElement("a");
         a.href = url;
-        a.download = `coloringfunai-${item.categoryLabel.toLowerCase().replace(/\s+/g, "-")}-coloring-page.png`;
+        a.download = `colormagic-${item.categoryLabel.toLowerCase().replace(/\s+/g, "-")}-coloring-page.png`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
@@ -122,7 +122,7 @@ export function GenerationHistory({ history, onRemove, onClear }: GenerationHist
         <!DOCTYPE html>
         <html>
           <head>
-            <title>ColoringFunAI - ${item.categoryLabel} Coloring Page</title>
+            <title>ColorMagic - ${item.categoryLabel} Coloring Page</title>
             <style>
               @page { size: letter; margin: 0.5in; }
               body { margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
@@ -152,11 +152,11 @@ export function GenerationHistory({ history, onRemove, onClear }: GenerationHist
   const displayedHistory = isExpanded ? history : history.slice(0, 3);
 
   return (
-    <div className="bg-card rounded-2xl p-6 shadow-card mt-12">
+    <div className="rounded-3xl border border-border bg-card p-6 shadow-card">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
           <Clock className="w-5 h-5 text-primary" aria-hidden="true" />
-          <h3 className="font-serif text-xl">Your Recent Creations</h3>
+          <h3 className="font-display text-xl font-semibold">Your recent creations</h3>
           <span className="bg-secondary text-secondary-foreground text-xs px-2 py-1 rounded-full">
             {history.length}
           </span>

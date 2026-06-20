@@ -4,72 +4,80 @@ const benefits = [
   {
     icon: Heart,
     title: "Stress Relief",
-    description: "Coloring activates relaxation areas in the brain, reducing anxiety and promoting calmness.",
+    description: "Coloring calms the mind, easing anxiety and helping kids and teens unwind.",
+    color: "text-primary",
+    bg: "bg-primary/10",
   },
   {
     icon: Sparkles,
     title: "Boost Creativity",
-    description: "Explore color combinations and express yourself freely through art therapy.",
+    description: "Mixing colors and ideas sparks imagination and free self-expression.",
+    color: "text-accent",
+    bg: "bg-accent/15",
   },
   {
     icon: Palette,
     title: "Mindful Focus",
-    description: "Enter a meditative state as you concentrate on patterns and colors.",
+    description: "Concentrating on patterns builds patience and a calm, focused mindset.",
+    color: "text-grape",
+    bg: "bg-grape/10",
   },
   {
     icon: Clock,
     title: "Quality Time",
-    description: "Perfect activity to share with family or enjoy peaceful moments alone.",
+    description: "A perfect screen-free activity to share with family or enjoy solo.",
+    color: "text-primary",
+    bg: "bg-primary/10",
   },
   {
     icon: Users,
     title: "All Ages Welcome",
-    description: "From kids to adults, our designs cater to every skill level and preference.",
+    description: "From toddlers to teens, every design adapts to any skill level.",
+    color: "text-accent",
+    bg: "bg-accent/15",
   },
   {
     icon: Download,
     title: "Instant Access",
-    description: "Download and print immediately—no account or payment required.",
+    description: "Download and print right away. No account, no payment, ever.",
+    color: "text-grape",
+    bg: "bg-grape/10",
   },
 ];
 
 export function BenefitsSection() {
   return (
-    <section
-      id="benefits"
-      className="py-20 md:py-28 bg-secondary/50"
-      aria-labelledby="benefits-heading"
-    >
+    <section id="benefits" className="scroll-mt-24 py-16 md:py-24" aria-labelledby="benefits-heading">
       <div className="container-custom">
-        <div className="text-center mb-16" data-reveal>
+        <div className="mx-auto max-w-2xl text-center" data-reveal>
+          <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-sunny/25 px-4 py-2 text-sm font-semibold text-sunny-foreground">
+            Good for body &amp; brain
+          </span>
           <h2
             id="benefits-heading"
-            className="font-serif text-3xl md:text-4xl lg:text-5xl mb-4"
+            className="font-display text-3xl font-bold tracking-tight text-balance md:text-4xl lg:text-5xl"
           >
-            Why Coloring Is Good for You
+            Why coloring is so good for you
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Discover the therapeutic benefits of coloring for your mind and well-being.
+          <p className="mx-auto mt-4 max-w-xl text-lg text-muted-foreground text-pretty">
+            It&apos;s more than fun, coloring supports focus, calm, and creativity for every age.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {benefits.map((benefit, index) => (
             <article
               key={benefit.title}
-              className="group bg-card rounded-xl p-6 md:p-8 shadow-soft hover:shadow-card hover:-translate-y-1 transition-all duration-300 opacity-0 animate-fade-in"
-              style={{ animationDelay: `${index * 100}ms` }}
+              className="group rounded-3xl border border-border bg-card p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-card animate-fade-in"
+              style={{ animationDelay: `${index * 80}ms` }}
             >
-              <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                <benefit.icon
-                  className="w-6 h-6 text-primary"
-                  aria-hidden="true"
-                />
+              <div
+                className={`mb-4 flex size-12 items-center justify-center rounded-2xl ${benefit.bg} ${benefit.color} transition-transform duration-300 group-hover:scale-110`}
+              >
+                <benefit.icon className="size-6" aria-hidden="true" />
               </div>
-              <h3 className="font-serif text-xl mb-2">{benefit.title}</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                {benefit.description}
-              </p>
+              <h3 className="font-display text-xl font-semibold">{benefit.title}</h3>
+              <p className="mt-2 leading-relaxed text-muted-foreground">{benefit.description}</p>
             </article>
           ))}
         </div>
