@@ -2,7 +2,26 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Wand2, Download, Loader2, RefreshCw, FileText, Sparkles } from "lucide-react";
+import {
+  Wand2,
+  Download,
+  Loader2,
+  RefreshCw,
+  FileText,
+  Sparkles,
+  PawPrint,
+  Crown,
+  Shield,
+  Gamepad2,
+  Clapperboard,
+  Car,
+  Bird,
+  BookOpen,
+  Leaf,
+  Library,
+  Castle,
+  ToyBrick,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -11,18 +30,18 @@ import { useGenerationHistory } from "@/hooks/use-generation-history";
 import { GenerationHistory } from "@/components/GenerationHistory";
 
 const categories = [
-  { id: "animals", label: "Animals", emoji: "🐾" },
-  { id: "disney", label: "Disney", emoji: "✨" },
-  { id: "superheroes", label: "Super Heroes", emoji: "🦸" },
-  { id: "videogames", label: "Video Games", emoji: "🎮" },
-  { id: "movies", label: "Movies / TV", emoji: "🎬" },
-  { id: "vehicles", label: "Vehicles", emoji: "🚗" },
-  { id: "dinosaurs", label: "Dinosaurs", emoji: "🦕" },
-  { id: "educational", label: "Educational", emoji: "📚" },
-  { id: "nature", label: "Nature", emoji: "🌿" },
-  { id: "books", label: "Books", emoji: "📖" },
-  { id: "princesses", label: "Princesses", emoji: "👑" },
-  { id: "toys", label: "Toys", emoji: "🧸" },
+  { id: "animals", label: "Animals", icon: PawPrint },
+  { id: "disney", label: "Disney", icon: Castle },
+  { id: "superheroes", label: "Super Heroes", icon: Shield },
+  { id: "videogames", label: "Video Games", icon: Gamepad2 },
+  { id: "movies", label: "Movies / TV", icon: Clapperboard },
+  { id: "vehicles", label: "Vehicles", icon: Car },
+  { id: "dinosaurs", label: "Dinosaurs", icon: Bird },
+  { id: "educational", label: "Educational", icon: Library },
+  { id: "nature", label: "Nature", icon: Leaf },
+  { id: "books", label: "Books", icon: BookOpen },
+  { id: "princesses", label: "Princesses", icon: Crown },
+  { id: "toys", label: "Toys", icon: ToyBrick },
 ];
 
 const ageGroups = [
@@ -232,23 +251,26 @@ export function AIGeneratorSection() {
                   role="radiogroup"
                   aria-label="Coloring page categories"
                 >
-                  {categories.map((category) => (
-                    <button
-                      key={category.id}
-                      onClick={() => setSelectedCategory(category.id)}
-                      role="radio"
-                      aria-checked={selectedCategory === category.id}
-                      className={cn(
-                        "inline-flex items-center gap-1.5 rounded-full border-2 px-3.5 py-2 text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-                        selectedCategory === category.id
-                          ? "border-primary bg-primary text-primary-foreground"
-                          : "border-border bg-background hover:border-primary/40",
-                      )}
-                    >
-                      <span aria-hidden="true">{category.emoji}</span>
-                      {category.label}
-                    </button>
-                  ))}
+                  {categories.map((category) => {
+                    const Icon = category.icon;
+                    return (
+                      <button
+                        key={category.id}
+                        onClick={() => setSelectedCategory(category.id)}
+                        role="radio"
+                        aria-checked={selectedCategory === category.id}
+                        className={cn(
+                          "inline-flex items-center gap-1.5 rounded-full border-2 px-3.5 py-2 text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                          selectedCategory === category.id
+                            ? "border-primary bg-primary text-primary-foreground"
+                            : "border-border bg-background hover:border-primary/40",
+                        )}
+                      >
+                        <Icon className="size-4" aria-hidden="true" />
+                        {category.label}
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
 
