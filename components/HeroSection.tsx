@@ -16,19 +16,37 @@ export function HeroSection() {
 
   return (
     <section
-      className="relative overflow-hidden pt-28 pb-16 sm:pt-32 md:pt-40 md:pb-24"
+      className="relative overflow-hidden bg-mesh pt-28 pb-16 sm:pt-32 md:pt-40 md:pb-24"
       aria-labelledby="hero-heading"
     >
       {/* Decorative floating shapes */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-        <div className="absolute -top-24 -right-16 size-80 rounded-full bg-primary/15 blur-2xl animate-float" />
+        <div className="absolute -top-24 -right-16 size-80 rounded-full bg-primary/20 blur-2xl animate-float" />
         <div
-          className="absolute top-40 -left-24 size-72 rounded-full bg-accent/15 blur-2xl animate-float"
+          className="absolute top-40 -left-24 size-72 rounded-full bg-accent/20 blur-2xl animate-float"
           style={{ animationDelay: "2s" }}
         />
         <div
-          className="absolute bottom-0 right-1/3 size-64 rounded-full bg-sunny/20 blur-2xl animate-float"
+          className="absolute bottom-0 right-1/3 size-64 rounded-full bg-sunny/25 blur-2xl animate-float"
           style={{ animationDelay: "4s" }}
+        />
+        <div
+          className="absolute top-1/3 left-1/4 size-56 rounded-full bg-lime/20 blur-2xl animate-float"
+          style={{ animationDelay: "3s" }}
+        />
+        {/* Twinkling stars */}
+        <Sparkles className="absolute left-[12%] top-32 size-6 text-sunny animate-twinkle" />
+        <Star
+          className="absolute right-[14%] top-44 size-5 text-grape animate-twinkle"
+          style={{ animationDelay: "0.8s" }}
+        />
+        <Sparkles
+          className="absolute right-[28%] bottom-24 size-5 text-accent animate-twinkle"
+          style={{ animationDelay: "1.4s" }}
+        />
+        <Star
+          className="absolute left-[22%] bottom-32 size-6 text-lime animate-twinkle"
+          style={{ animationDelay: "2s" }}
         />
       </div>
 
@@ -36,10 +54,19 @@ export function HeroSection() {
         <div className="mx-auto max-w-3xl text-center">
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 shadow-soft animate-fade-in">
             <span className="flex -space-x-1" aria-hidden="true">
-              <span className="size-2.5 rounded-full bg-primary" />
-              <span className="size-2.5 rounded-full bg-accent" />
-              <span className="size-2.5 rounded-full bg-sunny" />
-              <span className="size-2.5 rounded-full bg-grape" />
+              <span className="size-2.5 rounded-full bg-primary animate-bounce-slow" />
+              <span
+                className="size-2.5 rounded-full bg-accent animate-bounce-slow"
+                style={{ animationDelay: "0.2s" }}
+              />
+              <span
+                className="size-2.5 rounded-full bg-sunny animate-bounce-slow"
+                style={{ animationDelay: "0.4s" }}
+              />
+              <span
+                className="size-2.5 rounded-full bg-lime animate-bounce-slow"
+                style={{ animationDelay: "0.6s" }}
+              />
             </span>
             <span className="text-sm font-medium text-muted-foreground">
               AI coloring pages for kids &amp; teens
@@ -52,7 +79,7 @@ export function HeroSection() {
             style={{ animationDelay: "100ms" }}
           >
             Imagine it.{" "}
-            <span className="relative whitespace-nowrap text-primary">
+            <span className="relative whitespace-nowrap text-gradient-rainbow">
               Color it.
               <svg
                 className="absolute -bottom-2 left-0 w-full text-sunny"
@@ -82,8 +109,8 @@ export function HeroSection() {
             className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row animate-fade-in"
             style={{ animationDelay: "300ms" }}
           >
-            <Button variant="hero" size="xl" onClick={scrollToGenerator}>
-              <Wand2 aria-hidden="true" />
+            <Button variant="hero" size="xl" className="group" onClick={scrollToGenerator}>
+              <Wand2 className="transition-transform group-hover:wiggle" aria-hidden="true" />
               Start creating
             </Button>
             <Button variant="outline" size="xl" asChild>
@@ -98,12 +125,16 @@ export function HeroSection() {
             className="mx-auto mt-12 grid max-w-lg grid-cols-3 gap-3 animate-fade-in"
             style={{ animationDelay: "400ms" }}
           >
-            {stats.map((stat) => (
+            {stats.map((stat, i) => (
               <div
                 key={stat.label}
-                className="rounded-2xl border border-border bg-card px-2 py-4 shadow-soft"
+                className="rounded-2xl border border-border bg-card px-2 py-4 shadow-soft transition-transform duration-300 hover:-translate-y-1"
               >
-                <dt className="font-display text-lg font-bold text-foreground sm:text-xl">
+                <dt
+                  className={`font-display text-lg font-bold sm:text-xl ${
+                    ["text-primary", "text-accent", "text-grape"][i % 3]
+                  }`}
+                >
                   {stat.value}
                 </dt>
                 <dd className="mt-1 text-xs text-muted-foreground sm:text-sm">{stat.label}</dd>

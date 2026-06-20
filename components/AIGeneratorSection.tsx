@@ -198,15 +198,16 @@ export function AIGeneratorSection() {
     >
       <div className="container-custom">
         <div className="mx-auto max-w-2xl text-center" data-reveal>
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-primary">
-            <Sparkles className="size-4" aria-hidden="true" />
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-gradient-brand px-4 py-2 text-primary-foreground shadow-soft">
+            <Sparkles className="size-4 animate-twinkle" aria-hidden="true" />
             <span className="text-sm font-semibold">AI Magic Studio</span>
           </div>
           <h2
             id="ai-generator-heading"
             className="font-display text-3xl font-bold tracking-tight text-balance md:text-4xl lg:text-5xl"
           >
-            Create your own coloring page
+            Create your own{" "}
+            <span className="text-gradient-brand">coloring page</span>
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-lg text-muted-foreground text-pretty">
             Pick who it&apos;s for, choose a theme, add your idea, and let the AI do the magic.

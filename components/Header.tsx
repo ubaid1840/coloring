@@ -47,14 +47,14 @@ export function Header() {
           {/* Logo */}
           <a
             href="/"
-            className="flex items-center gap-2 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            className="group flex items-center gap-2 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             aria-label="ColorMagic Home"
           >
-            <span className="flex size-9 items-center justify-center rounded-2xl bg-primary text-primary-foreground shadow-soft">
-              <Sparkles className="size-5" aria-hidden="true" />
+            <span className="flex size-9 items-center justify-center rounded-2xl bg-gradient-brand text-primary-foreground shadow-soft transition-transform duration-300 group-hover:rotate-6">
+              <Sparkles className="size-5 animate-twinkle" aria-hidden="true" />
             </span>
             <span className="font-display text-xl font-bold tracking-tight">
-              Color<span className="text-primary">Magic</span>
+              Color<span className="text-gradient-brand">Magic</span>
             </span>
           </a>
 

@@ -5,43 +5,37 @@ const benefits = [
     icon: Heart,
     title: "Stress Relief",
     description: "Coloring calms the mind, easing anxiety and helping kids and teens unwind.",
-    color: "text-primary",
-    bg: "bg-primary/10",
+    tile: "bg-gradient-brand text-primary-foreground",
   },
   {
     icon: Sparkles,
     title: "Boost Creativity",
     description: "Mixing colors and ideas sparks imagination and free self-expression.",
-    color: "text-accent",
-    bg: "bg-accent/15",
+    tile: "bg-gradient-cool text-accent-foreground",
   },
   {
     icon: Palette,
     title: "Mindful Focus",
     description: "Concentrating on patterns builds patience and a calm, focused mindset.",
-    color: "text-grape",
-    bg: "bg-grape/10",
+    tile: "bg-gradient-sunny text-sunny-foreground",
   },
   {
     icon: Clock,
     title: "Quality Time",
     description: "A perfect screen-free activity to share with family or enjoy solo.",
-    color: "text-primary",
-    bg: "bg-primary/10",
+    tile: "bg-lime text-lime-foreground",
   },
   {
     icon: Users,
     title: "All Ages Welcome",
     description: "From toddlers to teens, every design adapts to any skill level.",
-    color: "text-accent",
-    bg: "bg-accent/15",
+    tile: "bg-gradient-brand text-primary-foreground",
   },
   {
     icon: Download,
     title: "Instant Access",
     description: "Download and print right away. No account, no payment, ever.",
-    color: "text-grape",
-    bg: "bg-grape/10",
+    tile: "bg-gradient-cool text-accent-foreground",
   },
 ];
 
@@ -68,13 +62,13 @@ export function BenefitsSection() {
           {benefits.map((benefit, index) => (
             <article
               key={benefit.title}
-              className="group rounded-3xl border border-border bg-card p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-card animate-fade-in"
+              className="group rounded-3xl border border-border bg-card p-6 shadow-soft transition-all duration-300 hover:-translate-y-2 hover:shadow-hover animate-fade-in"
               style={{ animationDelay: `${index * 80}ms` }}
             >
               <div
-                className={`mb-4 flex size-12 items-center justify-center rounded-2xl ${benefit.bg} ${benefit.color} transition-transform duration-300 group-hover:scale-110`}
+                className={`mb-4 flex size-12 items-center justify-center rounded-2xl shadow-soft ${benefit.tile} transition-transform duration-300 group-hover:scale-110`}
               >
-                <benefit.icon className="size-6" aria-hidden="true" />
+                <benefit.icon className="size-6 transition-transform group-hover:wiggle" aria-hidden="true" />
               </div>
               <h3 className="font-display text-xl font-semibold">{benefit.title}</h3>
               <p className="mt-2 leading-relaxed text-muted-foreground">{benefit.description}</p>

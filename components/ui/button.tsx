@@ -5,17 +5,22 @@ import { Slot } from "radix-ui"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "group/button inline-flex shrink-0 items-center justify-center gap-2 rounded-full border border-transparent bg-clip-padding font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/40 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-2 aria-invalid:ring-destructive/20 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  "group/button inline-flex shrink-0 items-center justify-center gap-2 rounded-full border border-transparent bg-clip-padding font-semibold whitespace-nowrap transition-all duration-200 outline-none select-none focus-visible:ring-4 focus-visible:ring-ring/30 active:scale-95 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-2 aria-invalid:ring-destructive/20 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground shadow-soft hover:bg-primary/90 hover:-translate-y-0.5",
+        default:
+          "bg-gradient-brand text-primary-foreground shadow-soft hover:-translate-y-0.5 hover:scale-[1.03] hover:shadow-hover",
         hero:
-          "bg-primary text-primary-foreground shadow-card hover:-translate-y-0.5 hover:shadow-hover",
+          "shimmer bg-gradient-brand text-primary-foreground shadow-card hover:-translate-y-1 hover:scale-[1.04] hover:shadow-hover",
+        accent:
+          "bg-gradient-cool text-accent-foreground shadow-soft hover:-translate-y-0.5 hover:scale-[1.03] hover:shadow-card",
+        sunny:
+          "bg-gradient-sunny text-sunny-foreground shadow-soft hover:-translate-y-0.5 hover:scale-[1.03] hover:shadow-card",
         outline:
-          "border-2 border-border bg-card text-foreground hover:border-primary/50 hover:bg-secondary/60",
+          "border-2 border-primary/25 bg-card text-foreground hover:border-primary/60 hover:bg-secondary/60 hover:-translate-y-0.5 hover:scale-[1.02]",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/70",
+          "bg-secondary text-secondary-foreground hover:bg-secondary/70 hover:-translate-y-0.5",
         ghost:
           "hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground",
         destructive:
